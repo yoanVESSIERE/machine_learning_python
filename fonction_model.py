@@ -26,8 +26,11 @@ class Model():
 
     def get_data(self, feature_name):
         """
-        Maybe we will need a function to get data
+        Function to get some data.
+        Take the name of the feature to stock them into the model
         """
+        if not check(feature_name, []):
+            exit(84)
         self.feature_name = feature_name
 
 
@@ -59,6 +62,8 @@ class Model():
         arg = k is k=3 by default but can be change, it's the accuracy
         of the aglorythm
         """
+        if not check(k, 0):
+            exit(84)
         for each in self.test_list:
             can_naive = False
             for elem in self.knowledge:
@@ -77,6 +82,8 @@ class Model():
         to have a better accuracy precision.\n
         You can repeat any number of time but the program will take more time
         """
+        if not check(repeat, 0):
+            exit(84)
         accur = 0
         total = 0
         i = 0
@@ -100,12 +107,14 @@ class Model():
         """
         Split all data into a test model and a train model.\n
         Parameter:\n
-        Data: All the data that will be split according to the percent variable. (list)\n
+        Data: All the data that will be split according to a random variable. (list)\n
         Label: The True label of the different data. (list)\n
-        Percent: It will be the percentage of data that will be in the train part. (float)\n
-        Returns:
-        Four list, the first one is the train model, the second is the test model, 
-        the third is the train_label_list and the last is the test_label_list
+
+        After use this function, you'll have access to the four list belowing:
+            self.train_list
+            self.train_label
+            self.test_list
+            self.test_label
         """
         if not data:
             data = self.data
@@ -139,10 +148,13 @@ class Model():
                 self.test_label.append(label[i])
             i += 1
 
+
     def __algorythm_naive__(self, main_element):
         """
         First part of our algorythm, Naives Bayes
         """
+        if not check(main_element, []):
+            exit(84)
         how_many = {}
         who = []
         exist = False
@@ -175,6 +187,10 @@ class Model():
         """
         Second part of our algorythm, K-nearest-neightbour
         """
+        if not check(main_element, ""):
+            exit(84)
+        if not check(k, 0):
+            exit(84)
         neightbour = {}
         k_in = 0
         i = 0
@@ -249,3 +265,22 @@ def randomisation(min, max):
         tmp = int(random.uniform(min, max))
         min_tmp += tmp / 2
     return tmp
+
+
+def check(var, type_obj):
+    """
+    Check if a var is type of type_obj or not
+    type_obj will be a empty var of the type needed to check
+    Return True or False
+
+    ex:
+        check("I am a string", "") ----------- True
+        check(["I", "am", "a", "list"], []) -- True
+        check(42, 0) ------------------------- True
+        check("I am not a dict", {}) --------- False
+    """
+    if type(var) == type(type_obj):
+        return True
+    print(var, "is not type of", \
+        str(type(type_obj)).replace('<class ', '').replace('>', ''))
+    return False

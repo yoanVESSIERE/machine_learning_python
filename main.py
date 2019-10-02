@@ -1,4 +1,4 @@
-from fonction_model import Model
+from fonction_model import Model, check
 
 data = {
     "name": ["John", "Sam", "Edouard", "Sallie", "Kennie", "Ellie", "Tom", "Alexandre", "Peter", "Tim"],
@@ -20,9 +20,3 @@ model.train()
 model.test_model_prediction()
 model.prediction()
 model.accuracy(10)
-# print("Here is train part")
-# print(model.train_list, "\n", model.train_label)
-# print("\nNow here is test part")
-# print(model.test_list, "\n", model.test_label)
-# print("\nNow here is data full part")
-# print(feature, "\n", label)
